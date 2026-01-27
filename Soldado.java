@@ -33,5 +33,9 @@ abstract class Soldado {
         return pontosDeVida > 0;
     }
 }
+public void subirNivel() {
+    this.nivel++;
+    System.out.println("✨ " + nome + " subiu para o nível " + nivel + "!");
+}
 
 //muitos commits de uma vez,pois tive problemas de conexão e passei 3 dias sem conseguir salvar o código e nem subir no git
