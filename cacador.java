@@ -1,4 +1,6 @@
+import java.util.Random;
 public class Cacador extends Soldado {
+
 //terceira subclasse de Soldado (Caçador)
     private Random random = new Random();
 
