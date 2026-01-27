@@ -1,6 +1,6 @@
 import java.util.Random;
 
-class GuardiaoDeFerro extends Soldado {
+public class GuardiaoDeFerro extends Soldado {
 //primeira subclasse de Soldado (Guardiao de ferro)
     private int vigor;
     private Random random = new Random();
