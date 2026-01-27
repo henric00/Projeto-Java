@@ -116,3 +116,26 @@ class Cacador extends Soldado {
         System.out.println(nome + " recebeu " + danoRecebido + " de dano.");
     }
 }
+
+public class Arena {
+    public static void main(String[] args) {
+
+        Soldado tanque = new GuardiaoDeFerro("Ares", 5);
+        Soldado mago = new Arcanista("Merlin", 5);
+        Soldado cacador = new Cacador("Legolas", 5);
+
+        System.out.println("=== INÍCIO DA BATALHA ===\n");
+
+        tanque.atacar(mago);
+        mago.atacar(cacador);
+        cacador.atacar(tanque);
+
+        System.out.println("\n=== STATUS FINAL ===");
+        System.out.println("Tanque vivo? " + tanque.estarVivo());
+        System.out.println("Mago vivo? " + mago.estarVivo());
+        System.out.println("Caçador vivo? " + cacador.estarVivo());
+    }
+}
+
+
+
