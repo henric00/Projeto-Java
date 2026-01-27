@@ -154,3 +154,5 @@ public class Arena {
         System.out.println("Caçador vivo? " + cacador.estarVivo());
     }
 }
+
+//muitos commits de uma vez,pois tive problemas de conexão e passei 3 dias sem conseguir salvar o código e nem subir no git
