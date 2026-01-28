@@ -10,22 +10,16 @@ public class Cacador extends Soldado {
 //método de ataque com chance de acerto crítico
     @Override
     public void atacar(Soldado inimigo) {
-        int dano = 20 + nivel * 2;
+        int dano = 20 + getNivel() * 2;
         boolean critico = random.nextInt(100) < 25;
 
         if (critico) {
             dano *= 2;
-            System.out.println(nome + " acertou um ATAQUE CRÍTICO!");
+            System.out.println(getNome() + " acertou um ATAQUE CRÍTICO!");
         } else {
-            System.out.println(nome + " disparou uma flecha!");
+            System.out.println(getNome() + " disparou uma flecha!");
         }
 
         inimigo.defender(dano);
-    }
-//método de defesa simples
-    @Override
-    public void defender(int danoRecebido) {
-        dano(danoRecebido);
-        System.out.println(nome + " recebeu " + danoRecebido + " de dano.");
     }
 }

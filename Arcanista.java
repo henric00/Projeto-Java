@@ -11,21 +11,16 @@ public class Arcanista extends Soldado {
     @Override
     public void atacar(Soldado inimigo) {
         if (mana >= 20) {
-            int dano = 30 + nivel * 3;
+            int dano = 30 + getNivel() * 3;
             mana -= 20;
-            System.out.println(nome + " lança um feitiço!");
+            System.out.println(getNome() + " lança um feitiço!");
             inimigo.defender(dano);
         } else {
             int dano = 8;
             mana += 10;
-            System.out.println(nome + " ataca fisicamente e recupera mana!");
+            System.out.println(getNome() + " ataca fisicamente e recupera mana!");
             inimigo.defender(dano);
         }
     }
-//método de defesa que reduz dano com mana
-    @Override
-    public void defender(int danoRecebido) {
-        dano(danoRecebido);
-        System.out.println(nome + " sofreu " + danoRecebido + " de dano.");
-    }
+
 }

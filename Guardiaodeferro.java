@@ -12,8 +12,8 @@ public class GuardiaoDeFerro extends Soldado {
 
     @Override
     public void atacar(Soldado inimigo) {
-        int dano = 15 + nivel * 2;
-        System.out.println(nome + " ataca com arma pesada!");
+        int dano = 15 + getNivel() * 2;
+        System.out.println(getNome() + " ataca com arma pesada!");
         inimigo.defender(dano);
     }
 
@@ -25,10 +25,9 @@ public class GuardiaoDeFerro extends Soldado {
 
         if (bloqueio && vigor >= 10) {
             vigor -= 10;
-            System.out.println(nome + " bloqueou totalmente o ataque!");
+            System.out.println(getNome() + " bloqueou totalmente o ataque!");
         } else {
-            dano(danoRecebido);
-            System.out.println(nome + " recebeu " + danoRecebido + " de dano.");
+           super.defender(danoRecebido);
         }
     }
 //método para recuperar vigor
