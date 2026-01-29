@@ -1,17 +1,15 @@
 import java.util.Random;
 
-abstract class Soldado {
+public abstract class Soldado {
 
     private String nome;
     private int pontosDeVida;
     private int nivel;
-    private int pontosDeExperiencia;
 
     public Soldado(String nome, int nivel, int pontosDeVida) {
         this.nome = nome;
         this.nivel = nivel;
         this.pontosDeVida = pontosDeVida;
-        this.pontosDeExperiencia = 0;
     }
 
     public abstract void atacar(Soldado inimigo);
@@ -39,6 +37,3 @@ public String getNome() { return nome; }
         return pontosDeVida > 0;
     }
 }
-
-    
-
