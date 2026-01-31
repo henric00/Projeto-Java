@@ -117,13 +117,13 @@ public class GerenciadorBatalha {
             if (!s.estarVivo()) mortosB.add(s);
         }
         for (Soldado s : mortosA) {
-            String msg = s.getNome() + " foi derrotado!";
+            String msg = s.getNome() + " fOI TOTALMENTE CORROMPIDO!";
             System.out.println(msg);
             logs.append(msg + "\n");
             ladoA.remove(s);
         }
         for (Soldado s : mortosB) {
-            String msg = s.getNome() + " foi derrotado!";
+            String msg = s.getNome() + " FOI PURIFICADO E DESNCASARÁ EM SONO ETERNO!";
             System.out.println(msg);
             logs.append(msg + "\n");
             ladoB.remove(s);
@@ -168,11 +168,11 @@ public class GerenciadorBatalha {
 
     private void exibirResultadoBatalha() {
         if (ladoA.isEmpty()) {
-            String msg = "=== LADO B (TREVAS) VENCEU A BATALHA! ===";
+            String msg = "=== AS TREVAS CONSUMIRAM A LUZ! ===";
             System.out.println(msg);
             logs.append(msg + "\n");
         } else {
-            String msg = "=== LADO A (LUZ) VENCEU A BATALHA! ===";
+            String msg = "=== A LUZ EXPURGOU AS TREVAS! ===";
             System.out.println(msg);
             logs.append(msg + "\n");
         }
