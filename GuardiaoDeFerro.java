@@ -6,7 +6,7 @@ public class GuardiaoDeFerro extends Soldado {
     private Random random = new Random();
 
     public GuardiaoDeFerro(String nome, int nivel) throws NomeInvalidoException {
-        super(nome, nivel, 150);
+        super(nome, nivel, 125); // vida máxima reduzida
         this.vigor = 50;
     }
 
@@ -18,17 +18,15 @@ public class GuardiaoDeFerro extends Soldado {
         return msg;
     }
 
-
-
     @Override
     public String defender(int danoRecebido) {
-        boolean bloqueio = random.nextInt(100) < 30;
+        boolean bloqueio = random.nextInt(100) < 25; // chance reduzida
 
         if (bloqueio && vigor >= 10) {
             vigor -= 10;
             return getNome() + " bloqueou totalmente o ataque!";
         } else {
-           return super.defender(danoRecebido);
+            return super.defender(danoRecebido);
         }
     }
 

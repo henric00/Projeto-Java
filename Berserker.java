@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class Berserker extends Soldado {
+
     private Random random = new Random();
 
     public Berserker(String nome, int nivel) throws NomeInvalidoException {
@@ -11,7 +12,9 @@ public class Berserker extends Soldado {
     public String atacar(Soldado inimigo) {
         StringBuilder msg = new StringBuilder();
         int dano = 18 + getNivel() * 3;
-        boolean critico = random.nextInt(100) < 10; 
+
+        boolean critico = random.nextInt(100) < 20; // chance de crítico aumentada
+
         if (getPontosDeVida() <= 30) {
             dano += 15 + getNivel() * 2;
             msg.append(getNome()).append(" entrou em FÚRIA! Dano aumentado.\n");
