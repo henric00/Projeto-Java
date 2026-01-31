@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class GuardiaoDeFerro extends Soldado {
-//primeira subclasse de Soldado (Guardiao de ferro)
+
     private int vigor;
     private Random random = new Random();
 
@@ -11,26 +11,27 @@ public class GuardiaoDeFerro extends Soldado {
     }
 
     @Override
-    public void atacar(Soldado inimigo) {
+    public String atacar(Soldado inimigo) {
         int dano = 15 + getNivel() * 2;
-        System.out.println(getNome() + " ataca com arma pesada!");
-        inimigo.defender(dano);
+        String msg = getNome() + " ataca com arma pesada!\n";
+        msg += inimigo.defender(dano) + "\n";
+        return msg;
     }
 
-//método de defesa com chance de bloquear o ataque
+
 
     @Override
-    public void defender(int danoRecebido) {
+    public String defender(int danoRecebido) {
         boolean bloqueio = random.nextInt(100) < 30;
 
         if (bloqueio && vigor >= 10) {
             vigor -= 10;
-            System.out.println(getNome() + " bloqueou totalmente o ataque!");
+            return getNome() + " bloqueou totalmente o ataque!";
         } else {
-           super.defender(danoRecebido);
+           return super.defender(danoRecebido);
         }
     }
-//método para recuperar vigor
+
     public void recuperarVigor(int quantidade) {
         vigor += quantidade;
         if (vigor > 50) {

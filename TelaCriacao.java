@@ -9,7 +9,6 @@ public class TelaCriacao extends JFrame {
     private JComboBox<String> comboClasse;
     private JComboBox<String> comboLado;
     private JTextField textNome;
-    private JSpinner spinnerNivel;
     private JButton botaoCriar;
     private JButton botaoIniciar;
     
@@ -277,15 +276,15 @@ public class TelaCriacao extends JFrame {
             return;
         }
 
-        if (equipeLuz.size() != equipeTrevas.size()) {
-            JOptionPane.showMessageDialog(this, "Os dois lados precisam ter a mesma quantidade de personagens para iniciar a batalha.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
         this.setVisible(false);
         SwingUtilities.invokeLater(() -> {
-            TelaBatalha telaBatalha = new TelaBatalha(equipeLuz, equipeTrevas);
-            telaBatalha.setVisible(true);
+            try {
+                TelaBatalha telaBatalha = new TelaBatalha(equipeLuz, equipeTrevas);
+                telaBatalha.setVisible(true);
+            } catch (BatalhaInvalidaException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                TelaCriacao.this.setVisible(true);
+            }
         });
     }
 

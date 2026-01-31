@@ -9,8 +9,10 @@ public class TelaBatalha extends JFrame {
     private JButton botaoProxima;
     private JLabel labelRodada;
     private JLabel labelStatus;
+    private JTextArea logsArea;
+    private JScrollPane scrollLogs;
 
-    public TelaBatalha(ArrayList<Soldado> equipeLuz, ArrayList<Soldado> equipeTrevas) {
+    public TelaBatalha(ArrayList<Soldado> equipeLuz, ArrayList<Soldado> equipeTrevas) throws BatalhaInvalidaException {
         this.gerenciador = new GerenciadorBatalha(equipeLuz, equipeTrevas);
 
         configurarJanela();
@@ -96,8 +98,12 @@ public class TelaBatalha extends JFrame {
     }
 
     private JPanel criarPainelInferior() {
-        JPanel painel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
+        JPanel painel = new JPanel(new BorderLayout());
         painel.setBackground(new Color(30, 30, 40));
+
+        // Painel de botões
+        JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
+        painelBotoes.setBackground(new Color(30, 30, 40));
 
         botaoProxima = new JButton("▶ Próxima Rodada");
         botaoProxima.setFont(new Font("Arial", Font.BOLD, 13));
@@ -117,8 +123,25 @@ public class TelaBatalha extends JFrame {
         botaoVoltar.setPreferredSize(new Dimension(150, 45));
         botaoVoltar.addActionListener(e -> voltarTelaCriacao());
 
-        painel.add(botaoProxima);
-        painel.add(botaoVoltar);
+        painelBotoes.add(botaoProxima);
+        painelBotoes.add(botaoVoltar);
+
+        // Área de logs
+        logsArea = new JTextArea();
+        logsArea.setEditable(false);
+        logsArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        logsArea.setBackground(new Color(20, 20, 30));
+        logsArea.setForeground(Color.WHITE);
+        logsArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+        scrollLogs = new JScrollPane(logsArea);
+        scrollLogs.setPreferredSize(new Dimension(0, 150));
+        scrollLogs.setBorder(BorderFactory.createTitledBorder(
+            BorderFactory.createLineBorder(Color.GRAY, 1),
+            "Logs da Batalha", 0, 0, new Font("Arial", Font.BOLD, 12), Color.LIGHT_GRAY));
+
+        painel.add(painelBotoes, BorderLayout.NORTH);
+        painel.add(scrollLogs, BorderLayout.CENTER);
 
         return painel;
     }
@@ -134,6 +157,8 @@ public class TelaBatalha extends JFrame {
     private void atualizarInterface() {
         atualizarPainelLados();
         atualizarLabels();
+        logsArea.setText(gerenciador.getLogs());
+        logsArea.setCaretPosition(logsArea.getDocument().getLength());
     }
 
     private void atualizarPainelLados() {
@@ -185,12 +210,12 @@ public class TelaBatalha extends JFrame {
         JPanel linha2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
         linha2.setBackground(isLuz ? new Color(50, 80, 50) : new Color(80, 50, 50));
 
-        JProgressBar barraVida = new JProgressBar(0, soldado.getPontosDeVida());
+        JProgressBar barraVida = new JProgressBar(0, soldado.getMaxPontosDeVida());
         barraVida.setValue(soldado.getPontosDeVida());
         barraVida.setStringPainted(true);
-        barraVida.setString(String.format("❤ %d/%d", soldado.getPontosDeVida(), soldado.getPontosDeVida()));
-        barraVida.setForeground(soldado.getPontosDeVida() > soldado.getPontosDeVida() / 2 ? 
-            new Color(0, 200, 0) : new Color(255, 50, 50));
+        barraVida.setString(String.format("❤ %d/%d", soldado.getPontosDeVida(), soldado.getMaxPontosDeVida()));
+        double percent = (double) soldado.getPontosDeVida() / soldado.getMaxPontosDeVida();
+        barraVida.setForeground(percent > 0.5 ? new Color(0, 200, 0) : percent > 0.25 ? new Color(255, 255, 0) : new Color(255, 50, 50));
         barraVida.setBackground(new Color(50, 50, 50));
         barraVida.setPreferredSize(new Dimension(400, 25));
         barraVida.setFont(new Font("Arial", Font.BOLD, 11));
