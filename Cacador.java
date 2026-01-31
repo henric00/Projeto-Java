@@ -1,25 +1,25 @@
 import java.util.Random;
 public class Cacador extends Soldado {
 
-//terceira subclasse de Soldado (Caçador)
     private Random random = new Random();
 
     public Cacador(String nome, int nivel) {
         super(nome, nivel, 70);
     }
-//método de ataque com chance de acerto crítico
     @Override
-    public void atacar(Soldado inimigo) {
+    public String atacar(Soldado inimigo) {
+        StringBuilder msg = new StringBuilder();
         int dano = 20 + getNivel() * 2;
         boolean critico = random.nextInt(100) < 25;
 
         if (critico) {
             dano *= 2;
-            System.out.println(getNome() + " acertou um ATAQUE CRÍTICO!");
+            msg.append(getNome()).append(" acertou um ATAQUE CRÍTICO!\n");
         } else {
-            System.out.println(getNome() + " disparou uma flecha!");
+            msg.append(getNome()).append(" disparou uma flecha!\n");
         }
 
-        inimigo.defender(dano);
+        msg.append(inimigo.defender(dano)).append("\n");
+        return msg.toString();
     }
 }

@@ -1,21 +1,22 @@
-import java.util.Random;
-
 public abstract class Soldado {
 
     private String nome;
     private int pontosDeVida;
+    private int maxPontosDeVida;
     private int nivel;
 
     public Soldado(String nome, int nivel, int pontosDeVida) {
         this.nome = nome;
-        this.nivel = nivel;
+        // Todos os soldados começam no nível 1 independentemente do parâmetro
+        this.nivel = 1;
         this.pontosDeVida = pontosDeVida;
+        this.maxPontosDeVida = pontosDeVida;
     }
 
-    public abstract void atacar(Soldado inimigo);
-    public void defender(int danoRecebido){
+    public abstract String atacar(Soldado inimigo);
+    public String defender(int danoRecebido){
         aplicarDano(danoRecebido);
-        System.out.println(this.nome + " recebeu " + danoRecebido + " de dano. Vida restante " + this.pontosDeVida);
+        return this.nome + " recebeu " + danoRecebido + " de dano.";
     }
 
     protected void aplicarDano(int valor) {
@@ -25,13 +26,14 @@ public abstract class Soldado {
         }
     }
 
-    public void subirNivel(){
-    this.nivel++;
-    System.out.println(nome + " subiu para o nível " + nivel + "!");
-}
-public String getNome() { return nome; }
+    public String subirNivel(){
+        this.nivel += 1;
+        return nome + " subiu para o nível " + nivel + "!";
+    }
+    public String getNome() { return nome; }
     public int getNivel() { return nivel; }
     public int getPontosDeVida() { return pontosDeVida; }
+    public int getMaxPontosDeVida() { return maxPontosDeVida; }
 
     public boolean estarVivo() {
         return pontosDeVida > 0;

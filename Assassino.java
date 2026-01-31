@@ -8,17 +8,18 @@ public class Assassino extends Soldado {
     }
 
     @Override
-    public void atacar(Soldado inimigo) {
-        
+    public String atacar(Soldado inimigo) {
+        StringBuilder msg = new StringBuilder();
         boolean ataqueFurtivo = random.nextInt(100) < 35;
         if (ataqueFurtivo) {
             int dano = 35 + getNivel() * 4;
-            System.out.println(getNome() + " executou um ATAQUE FURTIVO! (Especial)");
-            inimigo.defender(dano);
+            msg.append(getNome()).append(" executou um ATAQUE FURTIVO! (Especial)\n");
+            msg.append(inimigo.defender(dano)).append("\n");
         } else {
             int dano = 12 + getNivel() * 2;
-            System.out.println(getNome() + " ataca rapidamente!");
-            inimigo.defender(dano);
+            msg.append(getNome()).append(" ataca rapidamente!\n");
+            msg.append(inimigo.defender(dano)).append("\n");
         }
+        return msg.toString();
     }
 }

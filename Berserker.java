@@ -8,23 +8,23 @@ public class Berserker extends Soldado {
     }
 
     @Override
-    public void atacar(Soldado inimigo) {
+    public String atacar(Soldado inimigo) {
+        StringBuilder msg = new StringBuilder();
         int dano = 18 + getNivel() * 3;
         boolean critico = random.nextInt(100) < 10; 
-
-       
         if (getPontosDeVida() <= 30) {
             dano += 15 + getNivel() * 2;
-            System.out.println(getNome() + " entrou em FÚRIA! Dano aumentado.");
+            msg.append(getNome()).append(" entrou em FÚRIA! Dano aumentado.\n");
         }
 
         if (critico) {
             dano *= 2;
-            System.out.println(getNome() + " acertou um CRÍTICO!");
+            msg.append(getNome()).append(" acertou um CRÍTICO!\n");
         } else {
-            System.out.println(getNome() + " investe no inimigo!");
+            msg.append(getNome()).append(" investe no inimigo!\n");
         }
 
-        inimigo.defender(dano);
+        msg.append(inimigo.defender(dano)).append("\n");
+        return msg.toString();
     }
 }
