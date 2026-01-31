@@ -41,7 +41,9 @@ public class GerenciadorBatalha {
         }
 
         numRodada++;
-        System.out.println("======== TURNO " + numRodada + " ========");
+        String turnoMsg = "======== TURNO " + numRodada + " ========\n";
+        System.out.println(turnoMsg);
+        logs.append(turnoMsg); // <-- Adiciona ao log!
         executarRodada();
         System.out.println();
         return true;
@@ -85,8 +87,9 @@ public class GerenciadorBatalha {
             return;
         }
 
-        System.out.println("\n[Turno de " + atacante.getNome() + "]");
-        System.out.println(atacante.atacar(alvo));
+        String logTurno = "\n[Turno de " + atacante.getNome() + "]\n" + atacante.atacar(alvo);
+        System.out.println(logTurno);
+        logs.append(logTurno);
     }
 
     private Soldado escolherAlvoValido(ArrayList<Soldado> inimigos, int indicePreferencial) {
@@ -105,30 +108,43 @@ public class GerenciadorBatalha {
     }
 
     private void removerMortos() {
-        System.out.println("\n[Removendo combatentes mortos...]");
-        removerMortosDoLado(ladoA, "Lado A");
-        removerMortosDoLado(ladoB, "Lado B");
-    }
-
-    private void removerMortosDoLado(ArrayList<Soldado> lado, String nomeLado) {
-        for (int i = lado.size() - 1; i >= 0; i--) {
-            if (!lado.get(i).estarVivo()) {
-                System.out.println("  - " + lado.get(i).getNome() + " foi removido do " + nomeLado);
-                lado.remove(i);
-            }
+        ArrayList<Soldado> mortosA = new ArrayList<>();
+        ArrayList<Soldado> mortosB = new ArrayList<>();
+        for (Soldado s : ladoA) {
+            if (!s.estarVivo()) mortosA.add(s);
+        }
+        for (Soldado s : ladoB) {
+            if (!s.estarVivo()) mortosB.add(s);
+        }
+        for (Soldado s : mortosA) {
+            String msg = s.getNome() + " foi derrotado!";
+            System.out.println(msg);
+            logs.append(msg + "\n");
+            ladoA.remove(s);
+        }
+        for (Soldado s : mortosB) {
+            String msg = s.getNome() + " foi derrotado!";
+            System.out.println(msg);
+            logs.append(msg + "\n");
+            ladoB.remove(s);
         }
     }
 
     private void subirNivelSobreviventes() {
-        System.out.println("\n[Evolução dos sobreviventes...]");
-        subirNivelLado(ladoA);
-        subirNivelLado(ladoB);
-    }
-
-    private void subirNivelLado(ArrayList<Soldado> lado) {
-        for (Soldado soldado : lado) {
-            if (soldado.estarVivo()) {
-                System.out.println(soldado.subirNivel());
+        for (Soldado s : ladoA) {
+            if (s.estarVivo()) {
+                String msg = s.getNome() + " evoluiu!";
+                System.out.println(msg);
+                logs.append(msg + "\n");
+                s.subirNivel();
+            }
+        }
+        for (Soldado s : ladoB) {
+            if (s.estarVivo()) {
+                String msg = s.getNome() + " evoluiu!";
+                System.out.println(msg);
+                logs.append(msg + "\n");
+                s.subirNivel();
             }
         }
     }
@@ -152,9 +168,13 @@ public class GerenciadorBatalha {
 
     private void exibirResultadoBatalha() {
         if (ladoA.isEmpty()) {
-            System.out.println("=== LADO B (TREVAS) VENCEU A BATALHA! ===");
+            String msg = "=== LADO B (TREVAS) VENCEU A BATALHA! ===";
+            System.out.println(msg);
+            logs.append(msg + "\n");
         } else {
-            System.out.println("=== LADO A (LUZ) VENCEU A BATALHA! ===");
+            String msg = "=== LADO A (LUZ) VENCEU A BATALHA! ===";
+            System.out.println(msg);
+            logs.append(msg + "\n");
         }
     }
 
