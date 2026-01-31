@@ -189,13 +189,18 @@ public class TelaCriacao extends JFrame {
         String lado = (String) comboLado.getSelectedItem();
 
         Soldado soldado;
-        switch (classe) {
-            case "Caçador" -> soldado = new Cacador(nome, nivel);
-            case "Arcanista" -> soldado = new Arcanista(nome, nivel);
-            case "Guardião de Ferro" -> soldado = new GuardiaoDeFerro(nome, nivel);
-            case "Assassino" -> soldado = new Assassino(nome, nivel);
-            case "Berserker" -> soldado = new Berserker(nome, nivel);
-            default -> soldado = new Cacador(nome, nivel);
+        try {
+            switch (classe) {
+                case "Caçador" -> soldado = new Cacador(nome, nivel);
+                case "Arcanista" -> soldado = new Arcanista(nome, nivel);
+                case "Guardião de Ferro" -> soldado = new GuardiaoDeFerro(nome, nivel);
+                case "Assassino" -> soldado = new Assassino(nome, nivel);
+                case "Berserker" -> soldado = new Berserker(nome, nivel);
+                default -> soldado = new Cacador(nome, nivel);
+            }
+        } catch (NomeInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Nome inválido", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         if (lado.equals("Luz")) {

@@ -5,7 +5,7 @@ public class GuardiaoDeFerro extends Soldado {
     private int vigor;
     private Random random = new Random();
 
-    public GuardiaoDeFerro(String nome, int nivel) {
+    public GuardiaoDeFerro(String nome, int nivel) throws NomeInvalidoException {
         super(nome, nivel, 150);
         this.vigor = 50;
     }

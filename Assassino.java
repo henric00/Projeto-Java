@@ -3,7 +3,7 @@ import java.util.Random;
 public class Assassino extends Soldado {
     private Random random = new Random();
 
-    public Assassino(String nome, int nivel) {
+    public Assassino(String nome, int nivel) throws NomeInvalidoException {
         super(nome, nivel, 60);
     }
 

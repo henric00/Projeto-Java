@@ -2,7 +2,7 @@ public class Arcanista extends Soldado {
 
     private int mana;
 
-    public Arcanista(String nome, int nivel) {
+    public Arcanista(String nome, int nivel) throws NomeInvalidoException {
         super(nome, nivel, 80);
         this.mana = 100;
     }

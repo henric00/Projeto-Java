@@ -5,9 +5,11 @@ public abstract class Soldado {
     private int maxPontosDeVida;
     private int nivel;
 
-    public Soldado(String nome, int nivel, int pontosDeVida) {
+    public Soldado(String nome, int nivel, int pontosDeVida) throws NomeInvalidoException {
+        if (!nome.matches("^[A-Za-zÀ-ÿ]+$")) {
+            throw new NomeInvalidoException("Nome inválido: não pode conter números, espaços ou caracteres especiais.");
+        }
         this.nome = nome;
-        // Todos os soldados começam no nível 1 independentemente do parâmetro
         this.nivel = 1;
         this.pontosDeVida = pontosDeVida;
         this.maxPontosDeVida = pontosDeVida;

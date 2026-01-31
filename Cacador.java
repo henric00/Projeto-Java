@@ -3,7 +3,7 @@ public class Cacador extends Soldado {
 
     private Random random = new Random();
 
-    public Cacador(String nome, int nivel) {
+    public Cacador(String nome, int nivel) throws NomeInvalidoException {
         super(nome, nivel, 70);
     }
     @Override

@@ -3,7 +3,7 @@ import java.util.Random;
 public class Berserker extends Soldado {
     private Random random = new Random();
 
-    public Berserker(String nome, int nivel) {
+    public Berserker(String nome, int nivel) throws NomeInvalidoException {
         super(nome, nivel, 100);
     }
 
